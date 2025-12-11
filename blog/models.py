@@ -15,6 +15,7 @@ Model - означает, что Post является моделью Django, п
 author. Для этого нам нужно определить тип каждого поля (текст? Число? Дата? Связь с другим 
 объектом, например, «Пользователь»?).
 """
+
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # models.ForeignKey– это ссылка на другую модель.
     title = models.CharField(max_length=200) # models.CharField– так определяется текст с ограниченным количеством символов.
