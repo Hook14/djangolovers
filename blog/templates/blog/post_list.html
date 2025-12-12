@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Newbee's blog</title>
-
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">Newbee's blog Blog</a></h1>
-        </header>
-        {% for post in posts %}
-            <article>
-                <time>published:{{post.published_date }}</time>
-                <h2><a href="">{{ post.title }} </a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
-            </article>
-        {% endfor %}
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+{% extends "blog/base.html" %}<!-- соединяем 2 шаблона -->
+{% block content %}
+    {% for post in posts %}
+        <article class="post">
+            {% if post.published_date %} <!-- хотим проверить, не пуста ли запись published_date -->
+                <time class="date">
+                    {{ post.published_date }}
+                </time>
+            {% endif %}
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2> <!--Чтобы
+             ссылка из заголовка записи в списке записей вела на страницу с подробным описанием этой
+             записи. Post_detail - часть означает, что Django будет ожидать URL-адрес blog/urls.py с
+             name=post_detail. (pk=post.pk?) pk — это сокращение от primary key (первичный ключ),
+             который является уникальным идентификатором для каждой записи в базе данных. Мы получаем
+             доступ к первичному ключу, написав post.pk, так же как и к другим полям
+             ( title, author, и т. д.) в нашем Post объекте-->
+            <p>{{ post.text|linebreaksbr }}</p>
         </article>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
