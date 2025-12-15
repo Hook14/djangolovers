@@ -1,0 +1,16 @@
+{% include 'blog/base.html' %}
+<!-- Нам нужно отобразить форму. Мы можем сделать это, например, с помощью {{ form.as_p }}.
+Приведённую выше строку необходимо обернуть элементом HTML-формы: <form method="POST">...</form>.
+Нам нужна Save кнопка. Мы делаем это с помощью HTML-кнопки: <button type="submit">Save</button>.
+И наконец, сразу после открывающего <form ...>тега нам нужно добавить {% csrf_token %}. Это очень важно,
+поскольку это делает ваши формы безопасными! Если вы забудете об этом, Django выдаст ошибку
+при попытке сохранить форму: -->
+{% block content %}
+    <h2>
+        <div style="padding: 5px;"> New post</div>
+    </h2>
+    <form method="POST" class="post-form"> {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-secondary">Save</button>
+    </form>
+{% endblock %}

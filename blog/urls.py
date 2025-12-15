@@ -1,17 +1,19 @@
 from django.urls import path
-from . import views, admin
+from . import views
 
 "можем добавить наш первый шаблон URL:"
 urlpatterns = [
     path('', views.post_list, name='post_list'),
-    path('post/<int:pk>/', views.post_detail, name='post_detail')
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new/', views.post_new, name='post_new'),
+    path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
 ]
 """URL-адрес указывающий Django на 
     представление с именем `<view>` post_detail, которое будет отображать всю запись в
     блоге.
     post / то означает, что URL-адрес должен начинаться со слова post, за которым следует /. Пока всё хорошо.
     <int:pk> – Эта часть сложнее. Это означает, что Django ожидает целочисленное значение и передаст его в представление
-     в виде переменной с именем pk
+     в виде переменной с именем pk  
     """
 
 """
